@@ -1,31 +1,12 @@
-<div class="container mt-4">
-  <h1>Our Products</h1>
-
-  <!-- Search and Filter Form -->
-  <%= form_with url: products_path, method: :get, local: true, class: 'mb-4' do %>
-    <div class="row">
-      <div class="col-md-4">
-        <%= text_field_tag :keyword, params[:keyword], placeholder: 'Search products...', class: 'form-control' %>
-      </div>
-      <div class="col-md-3">
-        <%= select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), include_blank: 'All Categories', class: 'form-control' %>
-      </div>
-      <div class="col-md-3">
-        <%= select_tag :filter, options_for_select([['All Products', ''], ['On Sale', 'on_sale'], ['New (Last 3 Days)', 'new'], ['Recently Updated', 'recently_updated']], params[:filter]), class: 'form-control' %>
-      </div>
-      <div class="col-md-2">
-        <%= submit_tag 'Search', class: 'btn btn-primary w-100' %>
-      </div>
-    </div>
-  <% end %>
-
-  <!-- Products Grid -->
-  <div class="row">
-    <%= render partial: 'shared/product_card', collection: @products, as: :product %>
+<div class="container mt-5">
+  <div class="jumbotron text-center bg-light p-5 rounded">
+    <h1 class="display-4">Welcome to Hair by DG</h1>
+    <p class="lead">Premium hair care products for natural hair</p>
+    <%= link_to 'Shop Now', products_path, class: 'btn btn-primary btn-lg' %>
   </div>
 
-  <!-- Pagination -->
-  <div class="d-flex justify-content-center mt-4">
-    <%= paginate @products %>
+  <h2 class="mt-5 mb-4">Featured Products</h2>
+  <div class="row">
+    <%= render partial: 'shared/product_card', collection: @featured_products, as: :product %>
   </div>
 </div>
