@@ -18,4 +18,12 @@ class Product < ApplicationRecord
     products = products.where('name LIKE ? OR description LIKE ?', "%#{keyword}%", "%#{keyword}%") if keyword.present?
     products
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name", "description", "price", "stock", "on_sale", "category_id", "created_at", "updated_at"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["category", "order_items"]
+  end
 end
