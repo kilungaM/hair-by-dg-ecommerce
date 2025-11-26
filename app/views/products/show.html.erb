@@ -22,7 +22,7 @@
       <p class="mt-4"><%= @product.description %></p>
       <p><strong>In Stock:</strong> <%= @product.stock %> units</p>
 
-      <button class="btn btn-primary btn-lg mt-3">Add to Cart</button>
+      <%= button_to 'Add to Cart', add_to_cart_path(@product), method: :post, class: 'btn btn-primary btn-lg mt-3' %>
     </div>
   </div>
 </div>

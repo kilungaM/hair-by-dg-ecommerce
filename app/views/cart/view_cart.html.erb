@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h1>Shopping Cart</h1>
+
+  <% if @cart_items.empty? %>
+    <div class="alert alert-info">
+      Your cart is empty. <%= link_to 'Continue Shopping', products_path %>
+    </div>
+  <% else %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% total = 0 %>
+        <% @cart_items.each do |item| %>
+          <tr>
+            <td><%= item[:product].name %></td>
+            <td>$<%= item[:product].price %></td>
+            <td><%= item[:quantity] %></td>
+            <td>$<%= (item[:product].price * item[:quantity]).round(2) %></td>
+          </tr>
+          <% total += item[:product].price * item[:quantity] %>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="text-end"><strong>Total:</strong></td>
+          <td><strong>$<%= total.round(2) %></strong></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="text-end">
+      <%= link_to 'Continue Shopping', products_path, class: 'btn btn-outline-primary' %>
+      <button class="btn btn-primary">Proceed to Checkout</button>
+    </div>
+  <% end %>
+</div>

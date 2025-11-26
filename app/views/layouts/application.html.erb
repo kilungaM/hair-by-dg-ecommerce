@@ -95,16 +95,27 @@
               <%= link_to "Products", products_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
+              <%= link_to "Cart", cart_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
               <%= link_to "Admin", admin_root_path, class: "nav-link" %>
             </li>
           </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
 
     <!-- Flash Messages -->
     <% if notice %>
-      <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+      <div class="alert alert-info alert-dismissible fade show m-3" role="alert">
         <%= notice %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% end %>
+
+    <% if flash[:success] %>
+      <div class="alert alert-dismissible fade show m-3" role="alert" style="background-color: #D4AF37; color: #000;">
+        <%= flash[:success] %>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     <% end %>

@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
     # Search
     if params[:keyword].present?
       @products = @products.search_by_keyword_and_category(params[:keyword], params[:category_id])
+      flash.now[:notice] = "Found #{@products.count} products matching '#{params[:keyword]}'"
     end
 
     @categories = Category.all
