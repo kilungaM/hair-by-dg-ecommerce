@@ -1,0 +1,14 @@
+<div class="col-md-4 mb-4">
+  <div class="card product-card h-100">
+    <div class="card-body">
+      <% if product.on_sale %>
+        <span class="badge bg-danger">ON SALE</span>
+      <% end %>
+      <h5 class="card-title"><%= product.name %></h5>
+      <p class="text-muted small"><%= product.category.name %></p>
+      <p class="card-text"><%= truncate(product.description, length: 100) %></p>
+      <p class="text-primary"><strong>$<%= product.price %></strong></p>
+      <%= link_to 'View Details', product_path(product), class: 'btn btn-outline-primary' %>
+    </div>
+  </div>
+</div>
