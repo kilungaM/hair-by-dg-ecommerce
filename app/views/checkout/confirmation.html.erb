@@ -1,0 +1,88 @@
+<div class="container my-5">
+  <div class="alert alert-success text-center">
+    <h1 class="mb-3">✓ Order Confirmed!</h1>
+    <p class="lead">Thank you for your order!</p>
+    <p>Order #<%= @order.id %></p>
+  </div>
+
+  <div class="row">
+    <!-- Customer Information -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Customer Information</h3>
+        </div>
+        <div class="card-body">
+          <p><strong>Email:</strong> <%= @customer.email %></p>
+          <p><strong>Address:</strong> <%= @customer.address %></p>
+          <p><strong>City:</strong> <%= @customer.city %></p>
+          <p><strong>Province:</strong> <%= @customer.province.name %></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Order Summary</h3>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @order.order_items.each do |item| %>
+                <tr>
+                  <td><%= item.name %></td>
+                  <td>$<%= number_with_precision(item.price, precision: 2) %></td>
+                  <td><%= item.quantity %></td>
+                  <td>$<%= number_with_precision(item.price * item.quantity, precision: 2) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <table class="table table-borderless">
+            <tr>
+              <td class="text-end"><strong>Subtotal:</strong></td>
+              <td class="text-end">$<%= number_with_precision(@order.subtotal, precision: 2) %></td>
+            </tr>
+            <% if @order.gst_amount > 0 %>
+              <tr>
+                <td class="text-end"><strong>GST (<%= @customer.province.gst %>%):</strong></td>
+                <td class="text-end">$<%= number_with_precision(@order.gst_amount, precision: 2) %></td>
+              </tr>
+            <% end %>
+            <% if @order.pst_amount > 0 %>
+              <tr>
+                <td class="text-end"><strong>PST (<%= @customer.province.pst %>%):</strong></td>
+                <td class="text-end">$<%= number_with_precision(@order.pst_amount, precision: 2) %></td>
+              </tr>
+            <% end %>
+            <% if @order.hst_amount > 0 %>
+              <tr>
+                <td class="text-end"><strong>HST (<%= @customer.province.hst %>%):</strong></td>
+                <td class="text-end">$<%= number_with_precision(@order.hst_amount, precision: 2) %></td>
+              </tr>
+            <% end %>
+            <tr class="table-primary">
+              <td class="text-end"><strong>Grand Total:</strong></td>
+              <td class="text-end"><strong>$<%= number_with_precision(@order.grand_total, precision: 2) %></strong></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <%= link_to 'Continue Shopping', products_path, class: 'btn btn-primary btn-lg' %>
+  </div>
+</div>

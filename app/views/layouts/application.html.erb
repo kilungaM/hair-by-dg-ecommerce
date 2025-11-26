@@ -138,6 +138,25 @@
       </div>
     <% end %>
 
+    <% if flash[:error] %>
+      <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+        <%= flash[:error] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-warning alert-dismissible fade show m-3" role="alert">
+        <%= flash[:alert] %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% end %>
+
+    <!-- Breadcrumbs -->
+    <div class="container mt-3">
+      <%= render_breadcrumbs %>
+    </div>
+
     <%= yield %>
 
     <!-- Bootstrap JS -->

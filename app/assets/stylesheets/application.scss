@@ -1,0 +1,135 @@
+// Variables
+$primary-color: #D4AF37; // Gold
+$secondary-color: #000000; // Black
+$white-color: #FFFFFF;
+$gray-light: #e0e0e0;
+$gray-dark: #6c757d;
+
+$border-radius: 4px;
+$spacing-unit: 1rem;
+$transition-speed: 0.3s;
+
+// Mixins (showing operators usage)
+@mixin box-shadow($x: 0, $y: 4px, $blur: 12px, $color: rgba(212, 175, 55, 0.3)) {
+  box-shadow: $x $y $blur $color;
+}
+
+@mixin transition($property: all, $duration: $transition-speed, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+// Base styles with nesting
+body {
+  background-color: $white-color;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: $secondary-color;
+  line-height: 1.6;
+}
+
+// Navigation styles with nesting
+.navbar {
+  background-color: $secondary-color;
+  padding: $spacing-unit;
+
+  .navbar-brand {
+    color: $primary-color;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+    &:hover {
+      color: darken($primary-color, 10%);
+    }
+  }
+
+  .nav-link {
+    color: $white-color;
+    margin: 0 ($spacing-unit / 2);
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+// Button styles with inheritance
+%btn-base {
+  padding: ($spacing-unit / 2) $spacing-unit;
+  border-radius: $border-radius;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  @include transition(all, $transition-speed);
+}
+
+.btn-primary {
+  @extend %btn-base;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: $secondary-color;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+    color: $secondary-color;
+    @include box-shadow();
+  }
+}
+
+.btn-outline-primary {
+  @extend %btn-base;
+  border: 2px solid $primary-color;
+  color: $primary-color;
+  background-color: transparent;
+
+  &:hover {
+    background-color: $primary-color;
+    color: $secondary-color;
+  }
+}
+
+// Card styles with nesting and operators
+.card {
+  border: 2px solid $gray-light;
+  border-radius: $border-radius;
+  @include transition(all, $transition-speed);
+  margin-bottom: $spacing-unit;
+
+  &:hover {
+    border-color: $primary-color;
+    @include box-shadow();
+    transform: translateY(-5px);
+  }
+}
+
+// Breadcrumbs styles
+.breadcrumb {
+  background-color: transparent;
+  padding: $spacing-unit 0;
+  margin-bottom: $spacing-unit;
+
+  .breadcrumb-item {
+    color: $gray-dark;
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &.active {
+      color: $secondary-color;
+      font-weight: bold;
+    }
+  }
+}
+
+// Utility classes with operators
+.text-primary {
+  color: $primary-color !important;
+}
+
+.mt-3 { margin-top: $spacing-unit; }
+.mb-3 { margin-bottom: $spacing-unit; }

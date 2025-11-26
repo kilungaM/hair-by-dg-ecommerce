@@ -1,0 +1,95 @@
+<div class="container my-5">
+  <h1 class="mb-4">Checkout</h1>
+
+  <div class="row">
+    <!-- Order Summary -->
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Order Summary</h3>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @cart_items.each do |item| %>
+                <tr>
+                  <td><%= item[:product].name %></td>
+                  <td>$<%= number_with_precision(item[:product].price, precision: 2) %></td>
+                  <td><%= item[:quantity] %></td>
+                  <td>$<%= number_with_precision(item[:product].price * item[:quantity], precision: 2) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th colspan="3">Subtotal</th>
+                <th>$<%= number_with_precision(@subtotal, precision: 2) %></th>
+              </tr>
+              <tr>
+                <td colspan="4"><small class="text-muted">*Taxes will be calculated based on your province</small></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Information Form -->
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h3>Shipping Information</h3>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @customer, url: checkout_path, local: true do |f| %>
+            <% if @customer.errors.any? %>
+              <div class="alert alert-danger">
+                <h4><%= pluralize(@customer.errors.count, "error") %> prohibited this order:</h4>
+                <ul class="mb-0">
+                  <% @customer.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="mb-3">
+              <%= f.label :email, class: 'form-label' %>
+              <%= f.email_field :email, class: 'form-control', required: true, placeholder: 'your@email.com' %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :address, class: 'form-label' %>
+              <%= f.text_field :address, class: 'form-control', required: true, placeholder: '123 Main Street' %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :city, class: 'form-label' %>
+              <%= f.text_field :city, class: 'form-control', required: true, placeholder: 'City' %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :province_id, 'Province', class: 'form-label' %>
+              <%= f.collection_select :province_id, @provinces, :id, :name,
+                  { prompt: 'Select your province' },
+                  { class: 'form-select', required: true } %>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= f.submit 'Place Order', class: 'btn btn-primary btn-lg' %>
+              <%= link_to 'Back to Cart', cart_path, class: 'btn btn-outline-secondary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,7 @@
           <th>Price</th>
           <th>Quantity</th>
           <th>Subtotal</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -20,9 +21,25 @@
         <% @cart_items.each do |item| %>
           <tr>
             <td><%= item[:product].name %></td>
-            <td>$<%= item[:product].price %></td>
-            <td><%= item[:quantity] %></td>
-            <td>$<%= (item[:product].price * item[:quantity]).round(2) %></td>
+            <td>$<%= number_with_precision(item[:product].price, precision: 2) %></td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <!-- Option 1: Up/Down Buttons (Recommended for better UX) -->
+                <%= button_to '-', decrement_cart_path(item[:product].id), method: :patch, class: 'btn btn-sm btn-outline-secondary' %>
+
+                <!-- Text field for manual entry -->
+                <%= form_with url: update_cart_path(item[:product].id), method: :patch, local: true, class: 'd-inline' do %>
+                  <%= number_field_tag :quantity, item[:quantity], min: 1, class: 'form-control', style: 'width: 70px;' %>
+                  <%= submit_tag 'Update', class: 'btn btn-sm btn-outline-primary' %>
+                <% end %>
+
+                <%= button_to '+', increment_cart_path(item[:product].id), method: :patch, class: 'btn btn-sm btn-outline-secondary' %>
+              </div>
+            </td>
+            <td>$<%= number_with_precision(item[:product].price * item[:quantity], precision: 2) %></td>
+            <td>
+              <%= button_to 'Remove', remove_from_cart_path(item[:product].id), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' } %>
+            </td>
           </tr>
           <% total += item[:product].price * item[:quantity] %>
         <% end %>
@@ -30,14 +47,15 @@
       <tfoot>
         <tr>
           <td colspan="3" class="text-end"><strong>Total:</strong></td>
-          <td><strong>$<%= total.round(2) %></strong></td>
+          <td><strong>$<%= number_with_precision(total, precision: 2) %></strong></td>
+          <td></td>
         </tr>
       </tfoot>
     </table>
 
-    <div class="text-end">
+    <div class="text-end mt-3">
       <%= link_to 'Continue Shopping', products_path, class: 'btn btn-outline-primary' %>
-      <button class="btn btn-primary">Proceed to Checkout</button>
+      <%= link_to 'Proceed to Checkout', checkout_path, class: 'btn btn-primary' %>
     </div>
   <% end %>
 </div>
