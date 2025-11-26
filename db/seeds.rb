@@ -7,6 +7,7 @@ Product.destroy_all
 Category.destroy_all
 Province.destroy_all
 AdminUser.destroy_all
+PageContent.destroy_all
 
 # Create Admin User
 puts "Creating admin user..."
@@ -40,6 +41,27 @@ categories = {
   skincare: Category.create!(name: 'Skincare'),
   accessories: Category.create!(name: 'Accessories')
 }
+# Import products from CSV
+puts "Importing products from CSV..."
+require 'csv'
+
+csv_file = Rails.root.join('db', 'products.csv')
+if File.exist?(csv_file)
+  CSV.foreach(csv_file, headers: true) do |row|
+    category = Category.find_by(name: row['category'])
+    if category
+      Product.create!(
+        name: row['name'],
+        description: row['description'],
+        price: row['price'].to_f,
+        stock: row['stock'].to_i,
+        on_sale: row['on_sale'] == 'true',
+        category: category
+      )
+    end
+  end
+  puts "CSV products imported successfully!"
+end
 
 # Create Products
 puts "Creating products..."

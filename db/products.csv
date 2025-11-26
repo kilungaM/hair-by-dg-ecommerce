@@ -1,0 +1,13 @@
+name,description,price,stock,on_sale,category
+Deep Conditioner Mask,Intensive moisture treatment for extremely dry hair. Repairs damage and restores elasticity.,24.99,65,true,Hair Care
+Hair Growth Serum,Stimulates hair follicles and promotes faster growth with biotin and caffeine.,32.99,30,false,Hair Care
+Detangling Spray,Makes combing easier and reduces breakage. Perfect for kids and adults.,15.99,85,false,Hair Care
+Scalp Treatment Oil,Soothes dry scalp and reduces dandruff with tea tree and peppermint oil.,21.99,45,true,Hair Care
+Curl Defining Cream,Enhances natural curl pattern without crunch. Long-lasting hold.,19.99,70,false,Hair Care
+Heat Protectant Spray,Shields hair from heat damage up to 450°F. Essential for styling.,17.99,90,false,Hair Care
+Beard Balm,Styles and conditions beard while reducing itchiness.,18.99,55,false,Beard Care
+Beard Wash,Gentle cleanser specifically formulated for facial hair.,16.99,60,false,Beard Care
+Face Moisturizer,Lightweight daily moisturizer with SPF 30 protection.,28.99,40,true,Skincare
+Body Scrub,Exfoliating scrub with coconut and sugar. Leaves skin smooth.,22.99,50,false,Skincare
+Satin Pillowcase,Reduces friction and prevents hair breakage while sleeping.,19.99,80,false,Accessories
+Wide Tooth Comb,Perfect for detangling wet hair without damage.,8.99,100,false,Accessories
