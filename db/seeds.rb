@@ -62,3 +62,19 @@ products_data.each { |p| Product.create!(p) }
 
 puts "Seed data created successfully!"
 puts "Admin login: admin@hairbydg.com / password"
+
+# Create Page Content
+puts "Creating page content..."
+PageContent.create!(
+  title: 'About Hair by DG',
+  slug: 'about',
+  content: "Hair by DG is a Winnipeg-based salon that has been in business for five years. We offer professional hairstyling and grooming services for women, men, and children.\n\nOur team of 12 skilled stylists specializes in braiding, loc maintenance, haircuts, coloring, and extensions.\n\nOur mission is to help clients embrace and care for their natural hair textures while providing premium beauty services in a welcoming and inclusive environment."
+)
+
+PageContent.create!(
+  title: 'Contact Us',
+  slug: 'contact',
+  content: "Get in touch with Hair by DG!\n\nLocation: Winnipeg, Manitoba\nEmail: info@hairbydg.com\nPhone: (204) 555-0123\n\nBusiness Hours:\nMonday - Friday: 9am - 8pm\nSaturday: 9am - 6pm\nSunday: 10am - 5pm"
+)
+
+puts "Page content created!"

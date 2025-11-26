@@ -23,10 +23,28 @@
         background-color: var(--white);
       }
 
-      .navbar {
-        background-color: var(--black) !important;
-        border-bottom: 3px solid var(--gold);
-      }
+  <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <%= link_to "Home", root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Products", products_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Contact", contact_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Cart", cart_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Admin", admin_root_path, class: "nav-link" %>
+            </li>
+          </ul>
+        </div>
 
       .btn-primary {
         background-color: var(--gold);
